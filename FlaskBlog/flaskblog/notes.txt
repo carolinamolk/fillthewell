@@ -1,0 +1,24 @@
+CREATE_ALL
+
+As of Flask-SQLAlchemy 3.0, all access to db.engine (and db.session) requires an 
+active Flask application context. db.create_all uses db.engine, so it requires an 
+app context.
+
+with app.app_context():
+    db.create_all()
+
+
+in terminal using python:
+
+$ python
+>>> from project import app, db
+>>> app.app_context().push()
+>>> db.create_all()
+
+Use flask shell to start a Python shell that already has an app context and the db object imported.
+
+$ flask shell
+>>> db.create_all()
+
+
+***
